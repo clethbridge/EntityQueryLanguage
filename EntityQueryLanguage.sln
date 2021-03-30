@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityQueryLanguage.Components", "EntityQueryLanguage.Components\EntityQueryLanguage.Components.csproj", "{DEB91602-C809-4E1F-B1EE-2E562B51FB29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityQueryLanguage.Components", "EntityQueryLanguage.Components\EntityQueryLanguage.Components.csproj", "{DEB91602-C809-4E1F-B1EE-2E562B51FB29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityQueryLanguage.UnitTests", "EntityQueryLanguage.UnitTests\EntityQueryLanguage.UnitTests.csproj", "{4B5F13F0-2690-4057-A6EF-384546E6BAA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityQueryLanguage.UnitTests", "EntityQueryLanguage.UnitTests\EntityQueryLanguage.UnitTests.csproj", "{4B5F13F0-2690-4057-A6EF-384546E6BAA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityQueryLanguage.IntegrationTests", "EntityQueryLanguage.IntegrationTests\EntityQueryLanguage.IntegrationTests.csproj", "{9BAFEE71-BAD0-489C-B126-0066B5CB9EFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityQueryLanguage.Tests.Shared", "EntityQueryLanguage.Tests.Shared\EntityQueryLanguage.Tests.Shared.csproj", "{3F995A07-D430-4736-B6D6-3CE3815C4025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{4B5F13F0-2690-4057-A6EF-384546E6BAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B5F13F0-2690-4057-A6EF-384546E6BAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B5F13F0-2690-4057-A6EF-384546E6BAA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BAFEE71-BAD0-489C-B126-0066B5CB9EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BAFEE71-BAD0-489C-B126-0066B5CB9EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BAFEE71-BAD0-489C-B126-0066B5CB9EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BAFEE71-BAD0-489C-B126-0066B5CB9EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F995A07-D430-4736-B6D6-3CE3815C4025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F995A07-D430-4736-B6D6-3CE3815C4025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F995A07-D430-4736-B6D6-3CE3815C4025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F995A07-D430-4736-B6D6-3CE3815C4025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
