@@ -1,5 +1,6 @@
 ﻿using EntityQueryLanguage.Components.Models;
 using EntityQueryLanguage.Components.Services.Builders;
+using EntityQueryLanguage.Components.Services.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,10 @@ namespace EntityQueryLanguage.UnitTests
         {
             EntitySchema entitySchema = MockSchema(); 
 
-            sut = new SelectStatementBuilder(entitySchema, new ColumnBuilder());
+            sut = new SelectStatementBuilder(
+                entitySchema, 
+                new JoinParser(entitySchema),
+                new ColumnParser(entitySchema, new ColumnBuilder()));
         }
 
         [Fact(DisplayName = "'Build' derives a valid sql statement")]

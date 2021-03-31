@@ -195,8 +195,12 @@ namespace EntityQueryLanguage.IntegrationTests
             EntityQuery getCustomersWithOrders = BuildGetCustomersWithOrders();
 
             List<ExpandoObject> customersWithOrders = await entityQueryExecutor.ExecuteAsync(getCustomersWithOrders);
+            List<IDictionary<string, dynamic>> customers = customersWithOrders.Select(x => (IDictionary<string, dynamic>)x).ToList();
 
-            Assert.NotNull(customersWithOrders);
+            var customer = customers.FirstOrDefault(c => c.ContainsKey("orders"));
+            Assert.NotNull(customer);
+            var product =  ((List<ExpandoObject>)customer["orders"]).FirstOrDefault(o => ((IDictionary<string, dynamic>)o).ContainsKey("product"));
+            Assert.NotNull(product);
         }
 
         private async Task<int>GetCustomerIdAsync()
@@ -299,7 +303,7 @@ namespace EntityQueryLanguage.IntegrationTests
                             EntityKey = "ek-0003",
                             TermKeys = new List<string>()
                             {
-                                "t-0007", "t-0008"
+                                "ek-0003|pk", "t-0007", "t-0008"
                             },
                             Projections = new List<EntitySubQuery>()
                             {
@@ -311,7 +315,7 @@ namespace EntityQueryLanguage.IntegrationTests
                                         EntityKey = "ek-0002",
                                         TermKeys = new List<string>()
                                         {
-                                            "t-0003", "t-0004", "t-0005", "t-0006"
+                                            "ek-0002|pk", "t-0003", "t-0004", "t-0005", "t-0006"
                                         }
                                     }
                                 }

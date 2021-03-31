@@ -1,0 +1,207 @@
+{
+  "EntityTypes": [
+    {
+      "DatabaseName": "[shop].[Customers]",
+      "EntityKey": "ek-0001",
+      "CanInsert": true,
+      "CanUpdate": true,
+      "CanDelete": true,
+      "EntityFields": [
+        {
+          "ColumnName": "[Id]",
+          "TermKey": "ek-0001|pk",
+          "DataType": "int",
+          "IsIdentity": true,
+          "IsPrimaryKey": true,
+          "IsNullable": false,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[Name]",
+          "TermKey": "t-0001",
+          "DataType": "varchar",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": false,
+          "MaxLength": 128,
+          "Precision": 0,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[CreatedOn]",
+          "TermKey": "t-0002",
+          "DataType": "datetime",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": true,
+          "MaxLength": 8,
+          "Precision": 23,
+          "Scale": 3,
+          "IsLookup": false
+        }
+      ]
+    },
+    {
+      "DatabaseName": "[shop].[Products]",
+      "EntityKey": "ek-0002",
+      "CanInsert": true,
+      "CanUpdate": true,
+      "CanDelete": true,
+      "EntityFields": [
+        {
+          "ColumnName": "[Id]",
+          "TermKey": "ek-0002|pk",
+          "DataType": "int",
+          "IsIdentity": true,
+          "IsPrimaryKey": true,
+          "IsNullable": false,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[Name]",
+          "TermKey": "t-0003",
+          "DataType": "varchar",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": false,
+          "MaxLength": 128,
+          "Precision": 0,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[Summary]",
+          "TermKey": "t-0004",
+          "DataType": "varchar",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": true,
+          "MaxLength": 256,
+          "Precision": 0,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[Price]",
+          "TermKey": "t-0005",
+          "DataType": "decimal",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": false,
+          "MaxLength": 9,
+          "Precision": 14,
+          "Scale": 2,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[ProductType]",
+          "TermKey": "t-0006",
+          "DataType": "int",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": false,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": true
+        }
+      ]
+    },
+    {
+      "DatabaseName": "[shop].[Orders]",
+      "EntityKey": "ek-0003",
+      "CanInsert": true,
+      "CanUpdate": true,
+      "CanDelete": true,
+      "EntityFields": [
+        {
+          "ColumnName": "[Id]",
+          "TermKey": "ek-0003|pk",
+          "DataType": "int",
+          "IsIdentity": true,
+          "IsPrimaryKey": true,
+          "IsNullable": false,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[CreatedOn]",
+          "TermKey": "t-0007",
+          "DataType": "datetime",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": true,
+          "MaxLength": 8,
+          "Precision": 23,
+          "Scale": 3,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[CustomerId]",
+          "TermKey": "ek-0001|pk",
+          "DataType": "int",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": true,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[ProductId]",
+          "TermKey": "ek-0002|pk",
+          "DataType": "int",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": true,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": false
+        },
+        {
+          "ColumnName": "[Quantity]",
+          "TermKey": "t-0008",
+          "DataType": "int",
+          "IsIdentity": false,
+          "IsPrimaryKey": false,
+          "IsNullable": false,
+          "MaxLength": 4,
+          "Precision": 10,
+          "Scale": 0,
+          "IsLookup": false
+        }
+      ]
+    }
+  ],
+  "Lookups": [
+    {
+      "TermKey": "t-0006",
+      "DisplayOrder": 1,
+      "Code": 1,
+      "Value": "Bed"
+    },
+    {
+      "TermKey": "t-0006",
+      "DisplayOrder": 2,
+      "Code": 2,
+      "Value": "Bathroom"
+    },
+    {
+      "TermKey": "t-0006",
+      "DisplayOrder": 3,
+      "Code": 3,
+      "Value": "Beyond"
+    }
+  ]
+}

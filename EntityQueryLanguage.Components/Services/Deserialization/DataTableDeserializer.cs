@@ -1,4 +1,5 @@
-﻿using EntityQueryLanguage.Components.Models;
+﻿using EntityQueryLanguage.Components;
+using EntityQueryLanguage.Components.Models;
 using EntityQueryLanguage.Components.Services.Attributes;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EntityQueryLanguage.Components.Services.Deserialization
 {
@@ -37,7 +39,7 @@ namespace EntityQueryLanguage.Components.Services.Deserialization
         {
             EntityType entityType = entitySchema.GetEntityType(entityQuery.EntityKey);
 
-            List<DataRow> rows = GetRows(dataTable);
+            List<DataRow> rows = dataTable.GetRows();
 
             return DeserializeEntities(entityQuery, entityType, rows);
         }
@@ -76,6 +78,22 @@ namespace EntityQueryLanguage.Components.Services.Deserialization
 
                 ExpandoObject payload = dataRowDeserializer.Deserialize(subjectRows[0], entityType, entityQuery.TermKeys);
 
+                foreach (EntitySubQuery projection in entityQuery.Projections)
+                {
+                    List<ExpandoObject> payloads = DeserializeSubQuery(projection, subjectRows);
+
+                    ExpandoObject projectionPayload = payloads.FirstOrDefault();
+
+                    payload.AddField(projection.Name, projectionPayload);
+                }
+
+                foreach (EntitySubQuery collection in entityQuery.Collections)
+                {
+                    List<ExpandoObject> collectionPayloads = DeserializeSubQuery(collection, subjectRows);
+
+                    payload.AddField(collection.Name, collectionPayloads);
+                }
+
                 return payload;
             }
             catch (Exception ex)
@@ -84,10 +102,25 @@ namespace EntityQueryLanguage.Components.Services.Deserialization
             }
         }
 
-        private List<DataRow> GetRows(DataTable records) =>
-             records
-            .Rows
-            .Cast<DataRow>()
-            .ToList();
+        private List<ExpandoObject> DeserializeSubQuery(EntitySubQuery entitySubQuery, List<DataRow> subjectRows)
+        {
+            var payloads = new List<ExpandoObject>();
+
+            EntityType subQueryEntityType = entitySchema.GetEntityType(entitySubQuery.EntityQuery.EntityKey);
+
+            var ids = entityLocator.GetUniqueIds(subjectRows, subQueryEntityType.PrimaryKey.TermKey);
+
+            if (ids.Count() > 0)
+            {
+                Parallel.ForEach(ids, id =>
+                {
+                    var payload = DeserializeEntity(entitySubQuery.EntityQuery, subQueryEntityType, subjectRows,id);
+
+                    payloads.Add(payload);
+                });
+            }
+
+            return payloads;
+        }
     }
 }

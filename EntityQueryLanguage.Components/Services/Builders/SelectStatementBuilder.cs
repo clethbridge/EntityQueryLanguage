@@ -1,5 +1,6 @@
 ﻿using EntityQueryLanguage.Components.Models;
 using EntityQueryLanguage.Components.Services.Attributes;
+using EntityQueryLanguage.Components.Services.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,18 @@ namespace EntityQueryLanguage.Components.Services.Builders
     {
         private EntitySchema entitySchema;
 
-        private IColumnBuilder columnBuilder;
+        private IJoinParser relatedEntityParser;
+
+        private IColumnParser columnParser;
 
         public SelectStatementBuilder(
             EntitySchema entitySchema,
-            IColumnBuilder columnBuilder)
+            IJoinParser relatedEntityParser,
+            IColumnParser columnParser)
         {
             this.entitySchema = entitySchema;
-            this.columnBuilder = columnBuilder;
+            this.relatedEntityParser = relatedEntityParser;
+            this.columnParser = columnParser;
         }
 
         public SqlStatement Build(EntityQuery entityQuery)
@@ -34,7 +39,7 @@ namespace EntityQueryLanguage.Components.Services.Builders
 
             EntityType entityType = entitySchema.GetEntityType(entityQuery.EntityKey);
 
-            var columns = GetColumns(entityQuery, entityType);
+            var columns = columnParser.Parse(entityQuery);
 
             var columnSegment = string.Join($"\r\n\t,", columns);
 
@@ -42,16 +47,14 @@ namespace EntityQueryLanguage.Components.Services.Builders
             
             sql.AppendLine($"{Constants.FROM} {entityType.DatabaseName}");
 
+            var joinTokens = relatedEntityParser.Parse(entityQuery);
+
+            joinTokens.ForEach(join => sql.AppendLine($"\t{join}"));
+
             return new SqlStatement()
             {
                 Sql = sql.ToString().Trim()
             };
         }
-
-        private IEnumerable<string> GetColumns(EntityQuery entityQuery, EntityType entityType) =>
-             entityQuery
-            .TermKeys
-            .Select(termKey => entityType.GetEntityField(termKey))
-            .Select(entityField => columnBuilder.Build(entityType, entityField));
     }
 }

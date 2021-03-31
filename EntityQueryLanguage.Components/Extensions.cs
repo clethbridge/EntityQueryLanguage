@@ -4,6 +4,7 @@ using EntityQueryLanguage.Components.Services.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
@@ -21,6 +22,12 @@ namespace EntityQueryLanguage.Components
 
         public static IServiceCollection UseSqlServer(this IServiceCollection services, string connectionString) =>
             services.AddScoped(typeof(IDbContext), _ => new SqlServerDbContext(connectionString));
+
+        public static List<DataRow> GetRows(this DataTable dataTable) =>
+             dataTable
+            .Rows
+            .Cast<DataRow>()
+            .ToList();
 
         public static IServiceCollection UseEQL(
             this IServiceCollection services, 

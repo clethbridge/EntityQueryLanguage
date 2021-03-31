@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace EntityQueryLanguage.Components.Models
 {
+    [DebuggerDisplay("{TermKey}")]
     public class EntityField
     {
         /// <summary>
