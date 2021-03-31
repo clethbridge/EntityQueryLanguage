@@ -49,7 +49,7 @@ namespace EntityQueryLanguage.UnitTests
                         DatabaseName = "[dbo].[Customer]",
                         EntityFields = new List<EntityField>()
                         {
-                            new EntityField(){ TermKey = "t-0001", ColumnName = "[Id]"},
+                            new EntityField(){ TermKey = "t-0001", ColumnName = "[Id]", IsPrimaryKey = true},
                             new EntityField(){ TermKey = "t-0002", ColumnName = "[Name]"},
                             new EntityField(){ TermKey = "t-0003", ColumnName = "[Summary]"}
                         }

@@ -42,6 +42,15 @@ namespace EntityQueryLanguage.Components.Services.Parsers
             var relatedColumns = BuildColumns(entityQuery, entityType);
 
             tokens.AddRange(relatedColumns);
+            
+            bool noPrimary = !entityQuery.TermKeys.Contains(entityType.PrimaryKey.TermKey);
+
+            if (noPrimary)
+            {
+                string primaryKeyToken = columnBuilder.Build(entityType, entityType.PrimaryKey);
+
+                tokens.Add(primaryKeyToken);
+            }
 
             foreach (EntitySubQuery entitySubQuery in entityQuery.SubQueries)
             {

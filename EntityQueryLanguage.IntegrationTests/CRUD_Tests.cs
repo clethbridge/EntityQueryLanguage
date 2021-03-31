@@ -292,7 +292,7 @@ namespace EntityQueryLanguage.IntegrationTests
             return new EntityQuery()
             {
                 EntityKey = "ek-0001",
-                TermKeys = new List<string>() { "ek-0001|pk", "t-0001" },
+                TermKeys = new List<string>() { "t-0001" },
                 Collections = new List<EntitySubQuery>()
                 {
                     new EntitySubQuery()
@@ -302,8 +302,8 @@ namespace EntityQueryLanguage.IntegrationTests
                         {
                             EntityKey = "ek-0003",
                             TermKeys = new List<string>()
-                            {
-                                "ek-0003|pk", "t-0007", "t-0008"
+                            { 
+                                "t-0007", "t-0008"
                             },
                             Projections = new List<EntitySubQuery>()
                             {
@@ -314,8 +314,8 @@ namespace EntityQueryLanguage.IntegrationTests
                                     {
                                         EntityKey = "ek-0002",
                                         TermKeys = new List<string>()
-                                        {
-                                            "ek-0002|pk", "t-0003", "t-0004", "t-0005", "t-0006"
+                                        { 
+                                            "t-0003", "t-0004", "t-0005", "t-0006"
                                         }
                                     }
                                 }
